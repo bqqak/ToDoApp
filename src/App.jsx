@@ -1,8 +1,8 @@
-import { useState } from 'react'
+
 import './App.css'
 import Header from './components/Header/Header'
 import FilterTabs from './components/FilterTabs/FilterTabs'
-import AddTaskButton from './components/AddTaskButton'
+import Footer from './components/Footer/Footer'
 function App() {
   
 
@@ -11,8 +11,8 @@ function App() {
       <Header />
       <div>
         <FilterTabs />
-        
       </div>
+      <Footer />
     </>
   )
 }

@@ -9,16 +9,13 @@ function AddTaskButton({ addTask }) {
   }
 
   function getNewToDo(e) {
-  
     setTask(e.target.value);
   }
 
   function addNewToDo() {
     if (task.trim()) {
-        
-     addTask(task); 
-      setTask(""); 
-
+      addTask(task);
+      setTask("");
     }
   }
 

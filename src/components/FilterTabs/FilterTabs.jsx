@@ -1,14 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TabButton from "./TabButton";
 import AddTaskButton from "../AddTaskButton";
 import TabContent from "./TabContent";
 
+function safeJSONParse(item) {
+  try {
+    return item ? JSON.parse(item) : [];
+  } catch (error) {
+    console.error("Error parsing data from localStorage", error);
+    return [];
+  }
+}
+
 function FilterTabs() {
   const labels = ["To Do", "Done", "Trash"];
-  const [activeTab, setActiveTab] = useState("");
-  const [tasks, setTasks] = useState([]);
-  const [trashTasks, setTrashTasks] = useState([]);
-  const [doneTasks, setDoneTasks] = useState([])
+
+  const [tasks, setTasks] = useState(() =>
+    safeJSONParse(localStorage.getItem("tasks"))
+  );
+  const [doneTasks, setDoneTasks] = useState(() =>
+    safeJSONParse(localStorage.getItem("doneTasks"))
+  );
+  const [trashTasks, setTrashTasks] = useState(() =>
+    safeJSONParse(localStorage.getItem("trashTasks"))
+  );
+  const [activeTab, setActiveTab] = useState("To Do");
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  useEffect(() => {
+    localStorage.setItem("doneTasks", JSON.stringify(doneTasks));
+  }, [doneTasks]);
+
+  useEffect(() => {
+    localStorage.setItem("trashTasks", JSON.stringify(trashTasks));
+  }, [trashTasks]);
+
   const handleTabClick = (label) => {
     setActiveTab(label);
   };
@@ -18,22 +47,37 @@ function FilterTabs() {
     setTasks((prevTasks) => [...prevTasks, newTask]);
   };
 
-  const markAsDone = (taskToMark) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskToMark.id));
-    setDoneTasks((prevDoneTasks) => [...prevDoneTasks, taskToMark]);
+  const markAsDone = (taskToToggle) => {
+    if (doneTasks.some((task) => task.id === taskToToggle.id)) {
+      setDoneTasks((prevDoneTasks) =>
+        prevDoneTasks.filter((task) => task.id !== taskToToggle.id)
+      );
+    } else {
+      setDoneTasks((prevDoneTasks) => [...prevDoneTasks, taskToToggle]);
+    }
   };
+
   const removeTask = (taskToRemove) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskToRemove.id));
+    setTasks((prevTasks) =>
+      prevTasks.filter((task) => task.id !== taskToRemove.id)
+    );
     setTrashTasks((prevTrashTasks) => [...prevTrashTasks, taskToRemove]);
+    setDoneTasks((prevDoneTasks) =>
+      prevDoneTasks.filter((task) => task.id !== taskToRemove.id)
+    );
   };
 
   const restoreTask = (taskToRestore) => {
-    setTrashTasks((prevTrashTasks) => prevTrashTasks.filter((task) => task.id !== taskToRestore.id));
+    setTrashTasks((prevTrashTasks) =>
+      prevTrashTasks.filter((task) => task.id !== taskToRestore.id)
+    );
     setTasks((prevTasks) => [...prevTasks, taskToRestore]);
   };
 
   const deleteForever = (taskToDelete) => {
-    setTrashTasks((prevTrashTasks) => prevTrashTasks.filter((task) => task.id !== taskToDelete.id));
+    setTrashTasks((prevTrashTasks) =>
+      prevTrashTasks.filter((task) => task.id !== taskToDelete.id)
+    );
   };
 
   return (
@@ -56,11 +100,12 @@ function FilterTabs() {
       <TabContent
         activeTab={activeTab}
         tasks={tasks}
+        doneTasks={doneTasks}
         trashTasks={trashTasks}
+        markAsDone={markAsDone}
         removeTask={removeTask}
         restoreTask={restoreTask}
         deleteForever={deleteForever}
-        markAsDone={markAsDone}
       />
     </div>
   );

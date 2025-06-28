@@ -1,6 +1,6 @@
 function TaskItem({ task, onCheck, isSelected }) {
   const handleCheck = () => {
-    if(onCheck) {
+    if (onCheck) {
       onCheck(task);
     }
   };
@@ -15,7 +15,11 @@ function TaskItem({ task, onCheck, isSelected }) {
           onChange={handleCheck}
           checked={isSelected}
         />
-        <span className={isSelected ? "line-through text-gray-500" : "text-gray-800"}>
+        <span
+          className={
+            isSelected ? "line-through text-gray-500" : "text-gray-800"
+          }
+        >
           {task.text}
         </span>
       </div>
