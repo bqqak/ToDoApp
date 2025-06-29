@@ -1,7 +1,7 @@
 import TaskItem from "../Tasks/TaskItem";
 import MoveToTrash from "../Tasks/MoveToTrash";
 import { useState } from "react";
-
+import './css.css'
 function TabContent({
   activeTab,
   tasks,
@@ -24,7 +24,7 @@ function TabContent({
   const clearSelectedTask = () => setSelectedTask(null);
 
   return (
-    <div className="mt-8 p-4 ml-11 mr-11">
+    <div className="mt-8 p-4 ml-11 mr-11" id="tab-content">
       {activeTab === "To Do" && (
         <div>
           <p className="text-3xl font-medium">To Do</p>

@@ -4,7 +4,7 @@ function TabButton({ label, onClick }) {
     <div>
       <button
         onClick={onClick}
-        className="bg-gray-100 pl-7 pr-7 pt-3 pb-3 rounded-4xl"
+        className="bg-gray-100 pl-7 pr-7 pt-3 pb-3 rounded-4xl mt-10"
         id="labels_buttons"
       >
         {label}

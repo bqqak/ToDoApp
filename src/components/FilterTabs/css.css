@@ -1,5 +1,70 @@
-#labels_buttons:hover{
-    background-color: rgba(128, 128, 128, 0.683);
-    color: white;
-    font-weight: bold;
+#labels_buttons:hover {
+  background-color: rgba(128, 128, 128, 0.683);
+  color: white;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 428px) {
+  #labels_buttons {
+    width: 100%;
+    padding: 15px;
+  }
+  #labels_all_buttons {
+    margin: 0;
+    margin-left: 55px;
+    display: flex;
+    gap: 8px;
+  }
+  #plusSymbol {
+    margin-right: 20px;
+  }
+  #add_task_window {
+    left: 20px;
+    opacity: 0.9;
+  }
+  #footer {
+    flex-direction: column;
+    padding: 15px;
+    text-align: center;
+  }
+
+  #footer p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  #text-header {
+    font-size: 25px;
+  }
+  #subtext-header {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  #text-header {
+    font-size: 25px;
+  }
+  #subtext-header {
+    font-size: 15px;
+  }
+  #labels_buttons {
+    width: 100%;
+    padding: 10px;
+  }
+  #labels_all_buttons {
+    margin: 0;
+    margin-left: 55px;
+    display: flex;
+    gap: 15px;
+  }
+  #footer {
+    flex-direction: column;
+    padding: 15px;
+    text-align: center;
+  }
+
+  #footer p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
 }

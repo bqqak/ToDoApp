@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import TabButton from "./TabButton";
 import AddTaskButton from "../AddTaskButton";
 import TabContent from "./TabContent";
+import './css.css'
 
 function safeJSONParse(item) {
   try {
@@ -83,7 +84,7 @@ function FilterTabs() {
   return (
     <div>
       <div className="flex justify-between">
-        <div className="flex gap-12 ml-15">
+        <div className="flex gap-12 ml-15" id="labels_all_buttons">
           {labels.map((label) => (
             <TabButton
               key={label}

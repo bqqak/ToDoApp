@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./FilterTabs/css.css";
 
 function AddTaskButton({ addTask }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,9 +21,12 @@ function AddTaskButton({ addTask }) {
   }
 
   return (
-    <div className="mr-20">
+    <div className="mr-20" id="plusSymbol">
       {isOpen && (
-        <div className="bg-gray-200 rounded-2xl w-60 h-55 absolute right-50 top-25 flex flex-col ">
+        <div
+          className="bg-gray-200 rounded-2xl w-60 h-55 absolute right-50 top-25 flex flex-col "
+          id="add_task_window"
+        >
           <p className="pl-5 pt-3 pb-3 font-bold">Add New To Do</p>
           <div className="bg-white rounded-xl w-50 h-25 ml-5">
             <textarea
@@ -41,7 +45,7 @@ function AddTaskButton({ addTask }) {
         </div>
       )}
       <button
-        className="text-3xl bg-black text-white w-12 h-12 rounded-3xl"
+        className="text-3xl bg-black text-white w-12 h-12 rounded-3xl mt-10"
         onClick={addNewWindow}
       >
         +

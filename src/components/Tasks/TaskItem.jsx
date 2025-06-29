@@ -1,3 +1,4 @@
+import '../FilterTabs/css.css'
 function TaskItem({ task, onCheck, isSelected }) {
   const handleCheck = () => {
     if (onCheck) {
